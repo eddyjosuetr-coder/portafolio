@@ -1,0 +1,400 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   TOKENS CSS GLOBALES — Eddy Trejo Portfolio
+============================================================ */
+:root {
+  /* Paleta oficial */
+  --deep-space:   #0E161F;
+  --void:         #080C12;
+  --silver-blue:  #A0B2BC;
+  --glacier:      #E2E5EF;
+  --accent:       #42C0F5;   /* Trace Cyan */
+  --accent-glow:  #76D6FA;
+  --accent-deep:  #1C8CC2;
+
+  /* Aurora gradient */
+  --aurora: linear-gradient(90deg, #76D6FA 0%, #42C0F5 22%, #2A6FD8 55%, #0E161F 100%);
+
+  /* Aliases backward-compat */
+  --bg:          #0E161F;
+  --panel:       rgba(14, 22, 31, 0.6);
+  --panel-2:     rgba(14, 22, 31, 0.88);
+  --silver:      #A0B2BC;
+  --glow:        #76D6FA;
+  --ink:         #E2E5EF;
+  --ink-dim:     #A0B2BC;
+  --white:       #FFFFFF;
+  --line:        rgba(160,178,188,0.08);
+  --line-strong: rgba(160,178,188,0.16);
+
+  /* Radii angulares */
+  --r-card:      16px 0 16px 0;
+  --r-card-alt:   0 16px 0 16px;
+  --r-btn:        0 10px 0 10px;
+  --r-btn-ghost:  10px 0 10px 0;
+  --r-tag:        4px 0 4px 0;
+}
+
+/* ============================================================
+   BASE
+============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  /* Skill: no tap flash on mobile */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Skill: text-wrap balance for headings */
+h1, h2, h3, h4, h5 {
+  text-wrap: balance;
+}
+
+/* Skill: brand selection color */
+::selection {
+  background: rgba(70,205,240,0.25);
+  color: #E2E5EF;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Skill: scroll-padding-top so anchors clear the fixed navbar (~80px) */
+  scroll-padding-top: 88px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(160,178,188,0.35) transparent;
+}
+
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(160,178,188,0.35); border-radius: 3px; }
+
+body {
+  font-family: var(--font-work-sans, 'Work Sans', sans-serif);
+  background: var(--bg);
+  background-attachment: fixed;
+  color: var(--ink);
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Focus visible — 2px ring per WCAG (Skill: focus-states CRITICAL) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ============================================================
+   TIPOGRAFÍA UTILITARIA
+   font-display / font-body → Work Sans (definidas en Tailwind)
+   font-accent              → Satoshi (editorial, badges)
+============================================================ */
+.font-accent { font-family: var(--font-satoshi, 'Satoshi', sans-serif); }
+.font-mono   { font-family: ui-monospace, 'Cascadia Code', monospace; }
+
+/* ============================================================
+   BORDER-RADIUS ANGULARES
+   Tailwind no soporta multi-value en config, van aquí.
+============================================================ */
+.r-card     { border-radius: var(--r-card); }
+.r-card-alt { border-radius: var(--r-card-alt); }
+.r-btn      { border-radius: var(--r-btn); }
+.r-btn-g    { border-radius: var(--r-btn-ghost); }
+.r-tag      { border-radius: var(--r-tag); }
+
+/* ============================================================
+   BOTONES GLOBALES
+============================================================ */
+/* Skill: transition expo.out 200ms — snappy micro-interaction */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.5rem;
+  background: var(--accent);
+  color: var(--deep-space);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: var(--r-btn);
+  transition: background 200ms cubic-bezier(0.16,1,0.3,1),
+              transform 200ms cubic-bezier(0.16,1,0.3,1),
+              box-shadow 200ms cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: var(--accent-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 36px rgba(66,192,245,0.40);
+}
+.btn-primary:active  { transform: translateY(0); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1.5rem;
+  background: transparent;
+  color: var(--glacier);
+  font-weight: 500;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(160,178,188,0.25);
+  border-radius: var(--r-btn-ghost);
+  transition: border-color 200ms cubic-bezier(0.16,1,0.3,1),
+              color 200ms cubic-bezier(0.16,1,0.3,1),
+              background 200ms cubic-bezier(0.16,1,0.3,1),
+              box-shadow 200ms cubic-bezier(0.16,1,0.3,1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(66,192,245,0.06);
+  box-shadow: 0 0 0 1px rgba(66,192,245,0.20);
+}
+
+/* ============================================================
+   SECTION WRAPPER
+============================================================ */
+.section-pad {
+  padding-top:    clamp(5rem, 9vw, 7rem);
+  padding-bottom: clamp(5rem, 9vw, 7rem);
+}
+
+.site-container {
+  width: 100%;
+  max-width: min(1200px, 94vw);
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+}
+
+/* ============================================================
+   EYEBROW / LABEL TÉCNICO
+============================================================ */
+.eyebrow {
+  font-family: var(--font-satoshi, 'Satoshi', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--silver-blue);
+}
+
+/* ============================================================
+   TARJETAS
+============================================================ */
+.card-base {
+  background: var(--panel);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  /* Skill: complex transition ≤400ms */
+  transition: border-color 280ms cubic-bezier(0.16,1,0.3,1),
+              box-shadow   280ms cubic-bezier(0.16,1,0.3,1),
+              transform    280ms cubic-bezier(0.16,1,0.3,1),
+              background   280ms cubic-bezier(0.16,1,0.3,1);
+}
+.card-base:hover {
+  background: var(--panel-2);
+  border-color: var(--line-strong);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(160,178,188,0.08);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   SCROLLBAR PERSONALIZADA (Webkit)
+============================================================ */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: var(--bg); }
+::-webkit-scrollbar-thumb  {
+  background: rgba(160,178,188,0.3);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--silver); }
+
+/* ============================================================
+   REDUCED MOTION
+============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto; }
+  /* Freeze SVG animations */
+  animate, animateMotion, animateTransform { display: none !important; }
+}
+
+/* ============================================================
+   CUSTOM CURSOR — hide native on mouse devices
+============================================================ */
+@media (hover: hover) and (pointer: fine) {
+  html { cursor: none; }
+  a, button, [role="button"], input, select, textarea, label { cursor: none; }
+}
+
+/* ============================================================
+   SKIP NAVIGATION
+============================================================ */
+.skip-nav {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: var(--deep-space);
+  font-weight: 700;
+  font-size: 0.875rem;
+  transform: translateY(-200%);
+  transition: transform 0.2s ease;
+  text-decoration: none;
+}
+.skip-nav:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--accent-glow);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+   GLOW EFFECTS
+============================================================ */
+.glow-accent {
+  box-shadow: 0 0 0 1px rgba(66,192,245,0.3),
+              0 0 20px rgba(66,192,245,0.15),
+              0 0 40px rgba(66,192,245,0.06);
+}
+/* backward-compat alias */
+.glow-silver {
+  box-shadow: 0 0 0 1px rgba(160,178,188,0.25),
+              0 0 20px rgba(160,178,188,0.10),
+              0 0 40px rgba(160,178,188,0.05);
+}
+.text-glow {
+  text-shadow: 0 0 24px rgba(66,192,245,0.5);
+  color: var(--accent-glow);
+}
+
+@keyframes svc-scan   { 0%,100%{top:0%} 50%{top:100%} }
+@keyframes svc-shimmer{ 0%{background-position:200% center} 100%{background-position:-200% center} }
+@keyframes svc-blob   { 0%,100%{transform:translate(0,0) scale(1)} 33%{transform:translate(12px,-8px) scale(1.06)} 66%{transform:translate(-8px,10px) scale(0.96)} }
+
+/* Dot grid pattern */
+.dot-grid {
+  background-image: radial-gradient(rgba(160,178,188,0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ============================================================
+   HERO — animations & responsive layout
+============================================================ */
+@keyframes pc-float     { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+@keyframes pc-glow      { 0%,100%{opacity:.38;transform:translate(-50%,-50%) scale(1)} 50%{opacity:.62;transform:translate(-50%,-50%) scale(1.08)} }
+@keyframes pc-gesture   { 0%,58%{transform:perspective(1500px) rotateY(0deg) rotateZ(0deg) scale(1)} 70%{transform:perspective(1500px) rotateY(8.5deg) rotateZ(-1.5deg) scale(1.05)} 80%{transform:perspective(1500px) rotateY(8.5deg) rotateZ(-1.5deg) scale(1.05)} 100%{transform:perspective(1500px) rotateY(0deg) rotateZ(0deg) scale(1)} }
+@keyframes pc-eye-breath{ 0%,100%{opacity:.22;transform:translate(-50%,-50%) scale(1)} 50%{opacity:.42;transform:translate(-50%,-50%) scale(1.14)} }
+@keyframes pc-eye-flash { 0%,60%{opacity:0;transform:translate(-50%,-50%) scale(.85)} 71%{opacity:.92;transform:translate(-50%,-50%) scale(1.18)} 80%{opacity:.8;transform:translate(-50%,-50%) scale(1.12)} 100%{opacity:0;transform:translate(-50%,-50%) scale(.85)} }
+@keyframes pc-up        { from{opacity:0;transform:translateY(26px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pc-drift     { 0%{transform:translateY(0) translateX(0);opacity:0} 12%{opacity:.7} 88%{opacity:.5} 100%{transform:translateY(-90px) translateX(14px);opacity:0} }
+@keyframes pc-line      { 0%,100%{opacity:.25} 50%{opacity:.55} }
+
+@media (max-width:1100px){
+  .pc-grid{grid-template-columns:1.1fr .9fr!important;gap:16px!important}
+}
+@media (max-width:920px){
+  .pc-grid{grid-template-columns:1fr!important;min-height:calc(100vh - 96px)!important;padding-top:0!important;align-items:center!important}
+  .pc-robot-wrap{position:absolute!important;inset:0!important;opacity:.18!important;z-index:0!important;justify-content:center!important}
+  .pc-left{z-index:2!important;padding:120px 0 56px!important}
+  .pc-deco{display:none!important}
+  .pc-particle{display:none!important}
+}
+@media (max-width:540px){
+  .pc-left p{font-size:15px!important}
+  .pc-cta-row{gap:10px!important;flex-direction:column!important}
+  .pc-cta-row a{padding:14px 20px!important;font-size:14px!important;width:100%!important;justify-content:center!important}
+}
+@media (max-height:560px) and (max-width:920px){
+  .pc-grid{min-height:auto!important}
+}
+@media (min-width:1700px){
+  .pc-grid{max-width:1360px!important}
+}
+
+/* ============================================================
+   RESPONSIVE GLOBAL — all breakpoints
+============================================================ */
+
+/* Smaller section padding on phones */
+@media (max-width:640px){
+  .section-pad{
+    padding-top:clamp(3rem,10vw,5rem)!important;
+    padding-bottom:clamp(3rem,10vw,5rem)!important;
+  }
+  .site-container{ padding-left:1rem!important; padding-right:1rem!important; }
+}
+
+/* CTA final card — reduce radius on mobile */
+@media (max-width:640px){
+  .rounded-\[3rem\]{ border-radius:1.5rem!important; }
+}
+
+/* Guarantee bar wraps on small phones */
+@media (max-width:500px){
+  .guarantee-bar{ flex-wrap:wrap!important; gap:0.5rem 1rem!important; }
+}
+
+/* Typography safety net — nothing wider than viewport */
+@media (max-width:480px){
+  h1,h2,h3{ overflow-wrap:break-word; word-break:break-word; }
+}
+
+/* Navbar CTA hidden on very small screens */
+@media (max-width:360px){
+  .btn-primary.text-sm{ display:none!important; }
+}
+
+/* Services grid — 2 columns on small tablets before 3-col kicks in */
+@media (min-width:560px) and (max-width:767px){
+  .services-grid{ grid-template-columns:repeat(2,1fr)!important; }
+}
+
+/* Portfolio mobile cards — better aspect ratio on tablets */
+@media (min-width:560px) and (max-width:1023px){
+  .portfolio-mobile-card{ aspect-ratio:16/9!important; }
+}
+
+/* Large monitors — slightly more relaxed section padding */
+@media (min-width:1600px){
+  .section-pad{
+    padding-top:clamp(7rem,8vw,10rem)!important;
+    padding-bottom:clamp(7rem,8vw,10rem)!important;
+  }
+}
+
+/* Grain overlay — aplica como pseudo-elemento al wrapper que lo necesite */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
