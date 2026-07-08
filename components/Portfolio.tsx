@@ -146,7 +146,7 @@ function ProjectCard({ project, index }: { project: ProjectShape; index: number 
       href={`/proyectos/${project.slug}`}
       className="group shrink-0 w-[calc(100vw-2rem)] lg:w-[clamp(680px,calc(75vw-6.5rem),1360px)] rounded-2xl lg:rounded-[2rem] overflow-hidden relative snap-start block"
       style={{
-        height: 'clamp(500px, calc(100svh - 18rem), 720px)',
+        height: 'clamp(400px, calc(100svh - 16.5rem), 720px)',
         border: '1px solid rgba(255,255,255,0.06)',
         transition: `transform 500ms ${EASE}, box-shadow 500ms ${EASE}, border-color 500ms ${EASE}`,
         cursor: 'pointer',
@@ -410,9 +410,9 @@ export function Portfolio() {
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-glow/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
-        <header className="absolute top-0 left-0 right-0 z-20 pt-24 pl-12 xl:pl-16 pb-10 pointer-events-none"
+        <header className="absolute top-0 left-0 right-0 z-20 pt-[clamp(5.5rem,11svh,6rem)] pl-12 xl:pl-16 pb-8 pointer-events-none"
           style={{ background: 'linear-gradient(to bottom, rgba(10,18,27,1) 0%, rgba(10,18,27,0.95) 65%, transparent 100%)' }}>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-glass bg-void/60 backdrop-blur-md mb-5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-glass bg-void/60 backdrop-blur-md mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-glow animate-pulse" />
             <span className="text-[0.63rem] font-bold tracking-widest uppercase text-silver">Casos de Éxito</span>
           </div>
@@ -424,7 +424,7 @@ export function Portfolio() {
         </header>
 
         <div ref={trackRef}
-          className="absolute top-0 bottom-0 left-0 w-max flex items-start gap-8 pt-[17rem] pb-10 pl-12 xl:pl-16 will-change-transform"
+          className="absolute top-0 bottom-0 left-0 w-max flex items-start gap-8 pt-[clamp(10.5rem,24svh,16rem)] pb-10 pl-12 xl:pl-16 will-change-transform"
           style={{ scrollbarWidth: 'none' } as React.CSSProperties}>
           {PROJECTS.map((project, i) => (
             <ProjectCard key={project.slug} project={project} index={i} />
