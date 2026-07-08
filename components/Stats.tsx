@@ -7,7 +7,7 @@ import { gsap, ScrollTrigger } from '@/lib/gsap'
 ScrollTrigger // evita tree-shaking
 
 const STATS = [
-  { value: 4,   prefix: '0', suffix: '',   display: '04',   label: 'Plataformas activas'  },
+  { value: 6,   prefix: '0', suffix: '',   display: '06',   label: 'Plataformas activas'  },
   { value: 450, prefix: '',  suffix: '+',  display: '450+', label: 'Artículos gestionados'},
   { value: 24,  prefix: '',  suffix: '/7', display: '24/7', label: 'Flujos con IA'         },
   { value: 100, prefix: '',  suffix: '%',  display: '100%', label: 'Código a medida'       },

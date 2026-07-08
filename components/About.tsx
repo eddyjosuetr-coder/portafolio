@@ -442,7 +442,7 @@ export function About() {
               style={{ background: 'radial-gradient(ellipse 70% 70% at 80% 50%, rgba(249,115,22,0.1) 0%, transparent 70%)' }} />
             <p className="font-mono text-[0.62rem] tracking-[0.2em] uppercase" style={{ color: 'rgba(249,115,22,0.5)' }}>Proyectos</p>
             <span className="font-display font-black leading-none"
-              style={{ fontSize: 'clamp(4rem, 7vw, 5.5rem)', color: '#f97316', textShadow: '0 0 40px rgba(249,115,22,0.3)' }}>05</span>
+              style={{ fontSize: 'clamp(4rem, 7vw, 5.5rem)', color: '#f97316', textShadow: '0 0 40px rgba(249,115,22,0.3)' }}>07</span>
             <p className="font-mono text-[0.6rem] tracking-wider" style={{ color: 'rgba(249,115,22,0.35)' }}>En producción y creciendo</p>
           </div>
 
