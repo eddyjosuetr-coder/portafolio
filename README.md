@@ -1,6 +1,14 @@
-# PathCode — Portafolio web
+# Eddy Josue Trejo Rubio — Portafolio Personal
 
-Sitio web one-page de la agencia **PathCode**, construido con **Next.js 14 (App Router)**, TypeScript y Tailwind CSS.
+Portafolio web personal de **Eddy Josue Trejo Rubio**, Full Stack Developer de Venezuela. Construido con Next.js, TypeScript, Tailwind CSS y GSAP. Desplegado en producción en Vercel.
+
+🌐 **Live:** [eddytrejo.dev](https://eddytrejo.vercel.app) <!-- actualiza con tu URL real -->
+
+---
+
+## Sobre el proyecto
+
+Portafolio one-page con scroll horizontal animado para los proyectos, sección de automatización con n8n, stack tecnológico, sección "Sobre mí" en bento grid y footer con CTA directo a WhatsApp. Diseño dark cinematic con animaciones GSAP y ScrollTrigger.
 
 ---
 
@@ -8,122 +16,44 @@ Sitio web one-page de la agencia **PathCode**, construido con **Next.js 14 (App 
 
 | Herramienta | Versión | Propósito |
 |---|---|---|
-| Next.js | 14.2 | Framework |
-| React | 18 | UI |
-| TypeScript | 5 | Tipado |
-| Tailwind CSS | 3.4 | Estilos |
-| Framer Motion | 11 | Animaciones |
-| Work Sans | — | Tipografía cuerpo (Google Fonts) |
-| JetBrains Mono | — | Tipografía código (Google Fonts) |
-| Satoshi | — | Tipografía titulares (Fontshare CDN) |
+| Next.js | 16 | Framework (App Router) |
+| React | 19 | UI |
+| TypeScript | 5 | Tipado estático |
+| Tailwind CSS | 4 | Estilos |
+| GSAP + ScrollTrigger | 3 | Animaciones y scroll horizontal |
+| next/image | — | Optimización de imágenes |
 
 ---
 
-## Requisitos
+## Proyectos incluidos
 
-- Node.js 18 o superior
-- npm, yarn o pnpm
+| Proyecto | Categoría |
+|---|---|
+| Lunamare | Fullstack Web App |
+| Marimar Milenium | E-commerce B2B |
+| Velluto Ristorante | Web App + Automatización |
+| DevConnect | Red Social Fullstack |
+| Velluto – Reservas en Tiempo Real | Automatización n8n |
+| ChatBot WhatsApp — Universidad Ecuador | Automatización + IA |
+| InsureCalcPro | Herramientas Financieras |
 
 ---
 
-## Instalación y desarrollo
+## Instalación
 
 ```bash
-# 1. Instalar dependencias
+# 1. Clonar el repositorio
+git clone https://github.com/eddyjosuetr-coder/portafolio.git
+cd portafolio
+
+# 2. Instalar dependencias
 npm install
 
-# 2. Correr en modo desarrollo
+# 3. Correr en modo desarrollo
 npm run dev
 ```
 
 Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
-
----
-
-## Imágenes del portafolio
-
-Las capturas de pantalla de los proyectos van en `/public/img/`.
-Nombra los archivos exactamente así:
-
-| Proyecto | Archivo esperado |
-|---|---|
-| Lunamare | `/public/img/lunamare.jpg` |
-| Velluto Ristorante | `/public/img/velluto.jpg` |
-| Marimar Milenium | `/public/img/marimar.jpg` |
-| InsureCalcPro | `/public/img/insurecalcpro.jpg` |
-| OG / social sharing | `/public/img/og-image.jpg` |
-
-Si el archivo no existe, se muestra automáticamente un placeholder con gradiente
-temático para cada proyecto (sin errores de build).
-
----
-
-## Logo / Isotipo
-
-Copia el archivo del logo a la ruta esperada:
-
-```bash
-# Desde la raíz del proyecto
-cp "PNG/ISOTIPO - BLANCO.png" public/img/isotipo-blanco.png
-```
-
-El Navbar y el Footer buscan `/img/isotipo-blanco.png`.
-
----
-
-## Configuración de Calendly
-
-En `components/CtaFinal.tsx`, línea 8, reemplaza la URL del CTA primario:
-
-```ts
-const CALENDLY_URL = 'https://calendly.com/tu-usuario/llamada-pathcode'
-```
-
----
-
-## Fuentes en producción (optimización avanzada)
-
-Por defecto, **Satoshi** se carga desde el CDN de Fontshare.
-Para producción óptima (sin dependencia externa y con self-hosting automático de Next.js):
-
-1. Descarga Satoshi en [fontshare.com/fonts/satoshi](https://www.fontshare.com/fonts/satoshi)
-2. Copia los archivos `.woff2` a `/public/fonts/`
-3. Actualiza `app/layout.tsx`:
-
-```ts
-import localFont from 'next/font/local'
-
-const satoshi = localFont({
-  src: [
-    { path: '../public/fonts/Satoshi-Bold.woff2',   weight: '700' },
-    { path: '../public/fonts/Satoshi-Black.woff2',  weight: '900' },
-  ],
-  variable: '--font-satoshi',
-  display: 'swap',
-})
-```
-
-4. Elimina el `@import` de Fontshare en `app/globals.css`.
-
----
-
-## Despliegue en Vercel
-
-### Opción A — Vercel CLI
-
-```bash
-npm i -g vercel
-vercel
-```
-
-### Opción B — GitHub + Vercel (recomendado)
-
-1. Haz push de este repositorio a GitHub.
-2. Ve a [vercel.com](https://vercel.com) → New Project → Import.
-3. Selecciona el repositorio. Vercel detecta Next.js automáticamente.
-4. Click **Deploy**.
-
-No se necesitan variables de entorno para la configuración base.
 
 ---
 
@@ -132,47 +62,59 @@ No se necesitan variables de entorno para la configuración base.
 ```
 /
 ├── app/
-│   ├── globals.css      ← Tokens CSS + estilos base
-│   ├── layout.tsx       ← Root layout, fuentes, metadata SEO
-│   └── page.tsx         ← Página principal (importa los componentes)
+│   ├── globals.css               ← Tokens CSS y estilos base
+│   ├── layout.tsx                ← Root layout, fuentes, metadata SEO
+│   ├── page.tsx                  ← Página principal
+│   └── proyectos/[slug]/         ← Páginas de detalle por proyecto
 │
 ├── components/
-│   ├── ui/
-│   │   └── RevealSection.tsx   ← Wrapper animado reutilizable
+│   ├── ui/                       ← Componentes reutilizables (animaciones, botones)
 │   ├── Navbar.tsx
 │   ├── Hero.tsx
-│   ├── StackStrip.tsx
-│   ├── Portfolio.tsx
-│   ├── AutomationFlow.tsx
-│   ├── Stats.tsx
+│   ├── Portfolio.tsx             ← Carrusel horizontal con GSAP
+│   ├── AutomationFlow.tsx        ← Sección n8n / IA
+│   ├── About.tsx                 ← Bento grid sobre mí
 │   ├── Services.tsx
-│   ├── CtaFinal.tsx
+│   ├── Proceso.tsx
 │   └── Footer.tsx
 │
-├── public/
-│   └── img/             ← Coloca aquí las imágenes (ver sección arriba)
+├── lib/
+│   ├── proyectos.ts              ← Data de todos los proyectos
+│   └── gsap.ts                   ← Configuración GSAP
 │
-├── tailwind.config.ts   ← Tokens de color, tipografía, animaciones
+├── public/
+│   ├── img/                      ← Imágenes de portada de proyectos
+│   │   └── showcase/             ← Imágenes de detalle (mockups)
+│   ├── logo-eddy.png
+│   └── imagen-eddy.jpeg          ← Foto personal
+│
+├── tailwind.config.ts
 ├── next.config.mjs
-├── tsconfig.json
-└── README.md
+└── tsconfig.json
 ```
 
 ---
 
-## Personalización rápida
+## Agregar un nuevo proyecto
 
-| Qué cambiar | Dónde |
-|---|---|
-| Colores de marca | `tailwind.config.ts` → `theme.extend.colors` + `app/globals.css` → `:root` |
-| Proyectos del portafolio | `components/Portfolio.tsx` → array `PROJECTS` |
-| Estadísticas | `components/Stats.tsx` → array `STATS` |
-| Links de redes sociales | `components/Footer.tsx` → array `SOCIAL` |
-| URL de Calendly | `components/CtaFinal.tsx` → constante `CALENDLY_URL` |
-| Nodos del flujo (hero) | `components/Hero.tsx` → array `FLOW_STEPS` |
-| Nodos del flujo (sección IA) | `components/AutomationFlow.tsx` → arrays `NODES` y `EDGES` |
+1. Añade las imágenes en `public/img/` (portada) y `public/img/showcase/` (detalle).
+2. Agrega la entrada en `lib/proyectos.ts` siguiendo el tipo `Proyecto`.
+3. El carrusel y las páginas de detalle se generan automáticamente.
 
 ---
 
-Construido por **PathCode** · Trazamos el camino entre el código y tu negocio.
-# portafolio
+## Despliegue en Vercel
+
+```bash
+# Opción CLI
+npm i -g vercel
+vercel
+
+# Opción recomendada: conectar GitHub en vercel.com → New Project
+```
+
+No se requieren variables de entorno para el deploy base.
+
+---
+
+Construido por **Eddy Josue Trejo Rubio** · Full Stack Developer · Venezuela 🇻🇪
