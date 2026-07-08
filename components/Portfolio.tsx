@@ -146,7 +146,7 @@ function ProjectCard({ project, index }: { project: ProjectShape; index: number 
       href={`/proyectos/${project.slug}`}
       className="group shrink-0 w-[calc(100vw-2rem)] lg:w-[clamp(680px,calc(75vw-6.5rem),1360px)] rounded-2xl lg:rounded-[2rem] overflow-hidden relative snap-start block"
       style={{
-        height: 'clamp(400px, calc(100svh - 16.5rem), 720px)',
+        height: 'clamp(380px, calc(100svh - 20rem), 720px)',
         border: '1px solid rgba(255,255,255,0.06)',
         transition: `transform 500ms ${EASE}, box-shadow 500ms ${EASE}, border-color 500ms ${EASE}`,
         cursor: 'pointer',
@@ -424,7 +424,7 @@ export function Portfolio() {
         </header>
 
         <div ref={trackRef}
-          className="absolute top-0 bottom-0 left-0 w-max flex items-start gap-8 pt-[clamp(10.5rem,24svh,16rem)] pb-10 pl-12 xl:pl-16 will-change-transform"
+          className="absolute top-0 bottom-0 left-0 w-max flex items-start gap-8 pt-[clamp(14rem,26svh,16rem)] pb-10 pl-12 xl:pl-16 will-change-transform"
           style={{ scrollbarWidth: 'none' } as React.CSSProperties}>
           {PROJECTS.map((project, i) => (
             <ProjectCard key={project.slug} project={project} index={i} />
