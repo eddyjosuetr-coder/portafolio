@@ -2,7 +2,7 @@
 
 Portafolio web personal de **Eddy Josue Trejo Rubio**, Full Stack Developer de Venezuela. Construido con Next.js, TypeScript, Tailwind CSS y GSAP. Desplegado en producción en Vercel.
 
-🌐 **Live:** [eddytrejo.dev](https://eddytrejo.vercel.app) <!-- actualiza con tu URL real -->
+🌐 **Live:** [portafolio-zeta-lilac-88.vercel.app](https://portafolio-zeta-lilac-88.vercel.app)
 
 ---
 
