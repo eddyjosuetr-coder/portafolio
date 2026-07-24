@@ -292,8 +292,8 @@ export function Portfolio() {
         scrollTrigger: {
           trigger:           section,
           start:             'top top',
-          end:               () => `+=${getSlide() * 1.8}`,
-          scrub:             true,
+          end:               () => `+=${getSlide() * 1.2}`,
+          scrub:             1.2,
           pin:               true,
           anticipatePin:     1,
           invalidateOnRefresh: true,
