@@ -184,7 +184,7 @@ export function ProyectoAnimated({ p }: { p: Proyecto }) {
                   </svg>
                   {status === 'en-proceso' ? 'Ver repositorio' : 'Ver código'}
                 </a>
-                {/* En proceso label for Marimar */}
+                {/* En proceso label */}
                 {status === 'en-proceso' && (
                   <div className="pd-cta-btn inline-flex items-center gap-2 px-5 py-3 rounded-xl text-[0.82rem]"
                     style={{ background:'rgba(251,191,36,0.08)', border:'1px solid rgba(251,191,36,0.2)', color:'rgba(251,191,36,0.75)' }}>
@@ -241,7 +241,9 @@ export function ProyectoAnimated({ p }: { p: Proyecto }) {
               </div>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={imagenShowcase} alt={`Presentación de ${titulo}`} style={{ display:'block', width:'100%', height:'auto' }} />
+            {/* maxHeight + contain: las imágenes verticales no se estiran a ancho completo */}
+            <img src={imagenShowcase} alt={`Presentación de ${titulo}`}
+              style={{ display:'block', width:'100%', height:'auto', maxHeight:'90vh', objectFit:'contain', background:'#0b0f15' }} />
           </div>
         </div>
       </section>

@@ -18,6 +18,7 @@ export const TECH_LOGOS: Record<string, string> = {
   'React 19':               DV('react'),
   'Next.js':                SI('nextdotjs', 'ffffff'),
   'Vite':                   DV('vitejs'),
+  'Vite 7':                 DV('vitejs'),
   'Tailwind CSS':           DV('tailwindcss'),
   'shadcn/ui':              SI('shadcnui', 'ffffff'),
   'Lucide React':           SI('lucide', 'F56565'),
@@ -37,6 +38,12 @@ export const TECH_LOGOS: Record<string, string> = {
   'PostgreSQL':             DV('postgresql'),
   'MySQL':                  DV('mysql'),
   'Drizzle ORM':            SI('drizzle', 'C5F74F'),
+  'Supabase':               SI('supabase', '3FCF8E'),
+
+  /* ── Tooling ── */
+  'Python':                 DV('python'),
+  'Pillow':                 DV('python'),
+  'Playwright':             DV('playwright'),
 
   /* ── Auth ── */
   'OAuth 2.0':              SI('openid', '52535b'),
@@ -53,6 +60,7 @@ export const TECH_LOGOS: Record<string, string> = {
   /* ── Cloud / DevOps ── */
   'Vercel':                 SI('vercel', 'ffffff'),
   'Docker':                 DV('docker'),
+  'Cloudflare Pages':       DV('cloudflare'),
 }
 
 export function getTechLogo(name: string): string | null {
