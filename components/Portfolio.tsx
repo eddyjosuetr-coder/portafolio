@@ -55,7 +55,7 @@ function PanelDetails({ project, index }: { project: Proyecto; index: number }) 
         {project.descripcionCorta}
       </p>
 
-      <ul className="hidden sm:flex flex-wrap gap-1.5 mt-4" aria-label="Tecnologías principales">
+      <ul className="hidden sm:flex [@media(max-height:820px)]:!hidden flex-wrap gap-1.5 mt-4" aria-label="Tecnologías principales">
         {project.tecnologias.slice(0, MAX_CHIPS).map((t) => (
           <li key={t} className="px-2.5 py-1 rounded-md font-mono text-[0.6rem] tracking-wide backdrop-blur-md"
             style={{ background: 'rgba(4,8,16,0.55)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(226,229,239,0.85)' }}>
@@ -111,12 +111,19 @@ function Panel({ project, index, isActive, onActivate, onHover, onLeave }: Panel
     >
       {/* Fondo del panel: franja cerrada (móvil y escritorio) o panel abierto (escritorio) */}
       <div className={`absolute inset-0 ${isActive ? 'hidden lg:block' : ''}`}>
+      {/* Abierto: la misma captura difuminada rellena el panel, y encima va
+          completa (contain) para que no se recorte ningún lado */}
+      {isActive && (
+        <Image src={project.imagen} alt="" fill unoptimized aria-hidden="true"
+          className="object-cover scale-110"
+          style={{ filter: 'blur(28px) brightness(0.45) saturate(1.2)' }} />
+      )}
       <Image src={project.imagen} alt={isActive ? `Captura de ${project.titulo}` : ''} fill unoptimized
         sizes="(max-width: 1024px) 100vw, 70vw"
-        className="object-cover transition-[transform,filter] duration-700 group-hover/panel:scale-[1.03]"
+        className={`transition-[transform,filter] duration-700 ${isActive ? 'object-contain' : 'object-cover group-hover/panel:scale-[1.03]'}`}
         style={{
           objectPosition: 'center top',
-          filter: isActive ? 'none' : 'grayscale(0.55) brightness(0.5)',
+          filter: isActive ? 'drop-shadow(0 18px 40px rgba(0,0,0,0.55))' : 'grayscale(0.55) brightness(0.5)',
         }} />
 
       {/* Tinte del color del proyecto — solo cerrado */}
@@ -125,13 +132,13 @@ function Panel({ project, index, isActive, onActivate, onHover, onLeave }: Panel
 
       {/* Velos para leer: inferior al abrir, general cerrado */}
       <div aria-hidden="true" className="absolute inset-0 transition-opacity duration-500"
-        style={{ background: 'linear-gradient(to top, rgba(4,8,16,0.96) 0%, rgba(4,8,16,0.55) 42%, rgba(4,8,16,0) 72%)', opacity: isActive ? 1 : 0 }} />
+        style={{ background: 'linear-gradient(to top, rgba(4,8,16,0.96) 0%, rgba(4,8,16,0.6) 26%, rgba(4,8,16,0) 50%)', opacity: isActive ? 1 : 0 }} />
       <div aria-hidden="true" className="absolute inset-0 transition-opacity duration-500"
         style={{ background: 'linear-gradient(to bottom, rgba(4,8,16,0.2), rgba(4,8,16,0.75))', opacity: isActive ? 0 : 1 }} />
 
       {/* Número gigante en contorno — firma editorial del panel abierto */}
       <span aria-hidden="true"
-        className="absolute -top-3 right-4 lg:right-7 font-display font-black leading-none select-none transition-all duration-700 pointer-events-none"
+        className="absolute -bottom-4 right-4 lg:right-7 font-display font-black leading-none select-none transition-all duration-700 pointer-events-none"
         style={{
           fontSize: 'clamp(5rem, 11vw, 10rem)',
           color: 'transparent',
@@ -146,10 +153,9 @@ function Panel({ project, index, isActive, onActivate, onHover, onLeave }: Panel
       {/* Móvil abierto: la captura completa en su proporción y la ficha debajo */}
       {isActive && (
         <div className="lg:hidden">
-          <div className="relative aspect-[2/1]">
-            <Image src={project.imagen} alt={`Captura de ${project.titulo}`} fill unoptimized sizes="100vw"
-              className="object-cover object-top" />
-          </div>
+          <Image src={project.imagen} alt={`Captura de ${project.titulo}`} unoptimized
+            width={project.imagenSize.w} height={project.imagenSize.h} sizes="100vw"
+            className="block w-full h-auto" />
           <PanelDetails project={project} index={index} />
         </div>
       )}
@@ -239,7 +245,7 @@ export function Portfolio() {
           </div>
         </header>
 
-        <div className="flex flex-col lg:flex-row gap-2.5 lg:gap-3 lg:h-[clamp(470px,66svh,700px)]">
+        <div className="flex flex-col lg:flex-row gap-2.5 lg:gap-3 lg:h-[clamp(560px,80svh,780px)]">
           {PROYECTOS.map((p, i) => (
             <Panel key={p.slug} project={p} index={i} isActive={i === active}
               onActivate={setActive} onHover={hoverTo} onLeave={clearTimer} />

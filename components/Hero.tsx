@@ -211,7 +211,7 @@ export function Hero() {
               }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/robot.png"
+                  src="/robot.webp"
                   alt="Androide"
                   style={{
                     display: 'block', height: '100%', width: 'auto', objectFit: 'contain',
