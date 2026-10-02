@@ -38,12 +38,12 @@ export function Navbar() {
           }`}>
 
             {/* Logo */}
-            <a href="/" className="flex items-center gap-2.5 shrink-0 group" aria-label="Eddy Trejo — inicio">
+            <a href="/" className="flex items-center gap-2.5 shrink-0 group" aria-label="PathCode — inicio">
               <div className="transition-opacity duration-200 group-hover:opacity-80">
-                <Image src="/logo-eddy.png" alt="Eddy Trejo logo" width={52} height={52} className="object-contain" style={{ filter: 'brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,0.45))' }} />
+                <Image src="/img/isotipo-blanco.png" alt="" width={24} height={24} className="object-contain" />
               </div>
               <span className="font-display font-bold text-[1.05rem] text-glacier tracking-tight leading-none hidden sm:block">
-                Eddy Trejo
+                PathCode
               </span>
             </a>
 
@@ -60,8 +60,8 @@ export function Navbar() {
             {/* CTA desktop */}
             <div className="hidden md:flex items-center">
               <MagneticButton strength={0.22}>
-                <a href="https://wa.me/584243840126" target="_blank" rel="noopener noreferrer" className="btn-primary text-sm px-5 py-2.5">
-                  Contáctame
+                <a href="/#contacto" className="btn-primary text-sm px-5 py-2.5">
+                  Agenda una llamada
                 </a>
               </MagneticButton>
             </div>
@@ -103,8 +103,8 @@ export function Navbar() {
           <a href="/#portafolio" className="btn-ghost text-base justify-center py-3" onClick={() => setMenuOpen(false)}>
             Ver portafolio
           </a>
-          <a href="https://wa.me/584243840126" target="_blank" rel="noopener noreferrer" className="btn-primary text-base justify-center py-3" onClick={() => setMenuOpen(false)}>
-            Contáctame
+          <a href="/#contacto" className="btn-primary text-base justify-center py-3" onClick={() => setMenuOpen(false)}>
+            Agenda una llamada
           </a>
         </div>
       </nav>

@@ -97,10 +97,10 @@ export function ProyectoAnimated({ p }: { p: Proyecto }) {
           <div className="flex items-center justify-between mb-10 md:mb-14">
             <div className="pd-brand flex items-center gap-2.5">
               <div className="shrink-0">
-                <NextImage src="/logo-eddy.png" alt="Eddy Trejo logo" width={56} height={56} className="object-contain" style={{ filter: 'brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,0.45))' }} />
+                <NextImage src="/img/isotipo-blanco.png" alt="" width={28} height={28} className="object-contain" />
               </div>
               <div>
-                <div className="font-display font-bold text-white text-[0.85rem] md:text-[0.9rem] leading-none">Eddy Trejo</div>
+                <div className="font-display font-bold text-white text-[0.85rem] md:text-[0.9rem] leading-none">PathCode</div>
                 <div className="font-mono text-[0.48rem] md:text-[0.52rem] tracking-[0.15em] uppercase mt-0.5 hidden sm:block" style={{ color:`${accent}65` }}>Caso de estudio</div>
               </div>
             </div>
@@ -300,8 +300,8 @@ export function ProyectoAnimated({ p }: { p: Proyecto }) {
               </svg>
               <p className="text-[0.9rem] leading-relaxed font-semibold flex-1" style={{ color:'rgba(224,229,239,0.92)' }}>{destacado}</p>
               <div className="flex items-center gap-1.5 mt-5 pt-4 border-t" style={{ borderColor:`${accent}22` }}>
-                <NextImage src="/logo-eddy.png" alt="Eddy Trejo logo" width={26} height={26} className="object-contain" style={{ filter: 'brightness(1.35) drop-shadow(0 0 4px rgba(255,255,255,0.4))' }} />
-                <span className="font-mono text-[0.5rem] tracking-widest uppercase" style={{ color:`${accent}55` }}>Eddy Trejo</span>
+                <NextImage src="/img/isotipo-blanco.png" alt="" width={13} height={13} className="object-contain" />
+                <span className="font-mono text-[0.5rem] tracking-widest uppercase" style={{ color:`${accent}55` }}>PathCode</span>
               </div>
             </div>
 
@@ -342,9 +342,9 @@ export function ProyectoAnimated({ p }: { p: Proyecto }) {
 
             <div className="flex items-center justify-center gap-2.5 mb-4">
               <div style={{ filter:`drop-shadow(0 0 10px ${accent}) brightness(1.35) drop-shadow(0 0 6px rgba(255,255,255,0.5))` }}>
-                <NextImage src="/logo-eddy.png" alt="Eddy Trejo logo" width={60} height={60} className="object-contain" />
+                <NextImage src="/img/isotipo-blanco.png" alt="" width={30} height={30} className="object-contain" />
               </div>
-              <span className="font-display font-black text-white text-xl tracking-tight">Eddy Trejo</span>
+              <span className="font-display font-black text-white text-xl tracking-tight">PathCode</span>
             </div>
 
             <p className="font-mono text-[0.6rem] tracking-[0.3em] uppercase mb-4" style={{ color:`${accent}70` }}>

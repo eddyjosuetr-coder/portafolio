@@ -41,31 +41,31 @@ export const viewport: Viewport = {
    SEO Metadata
 ---------------------------------------------------------- */
 export const metadata: Metadata = {
-  title: 'Eddy Trejo — Full Stack Developer & Automatización con n8n',
+  title: 'PathCode — Ingeniería de Software & Automatización Estratégica',
   description:
-    'Full Stack Developer especializado en plataformas web de alto rendimiento y automatización de flujos empresariales con n8n e IA.',
+    'Firma boutique de ingeniería de software y automatización estratégica. Construimos plataformas web de alto rendimiento y automatizamos flujos empresariales con n8n e IA.',
   keywords: [
     'desarrollo web full stack',
     'automatización n8n',
     'integración IA',
+    'consultoría software',
     'React',
     'Next.js',
-    'Eddy Trejo',
-    'Eddy Josue Trejo Rubio',
+    'PathCode',
   ],
-  authors: [{ name: 'Eddy Josue Trejo Rubio' }],
+  authors: [{ name: 'PathCode' }],
   openGraph: {
-    title: 'Eddy Trejo — Full Stack Developer & Automatización con n8n',
+    title: 'PathCode — Ingeniería de Software & Automatización Estratégica',
     description:
-      'Full Stack Developer. Construyo plataformas web modernas y automatizo operaciones con n8n e IA.',
+      'Trazamos el camino entre el código y tu negocio. Desarrollo Full Stack, automatización con n8n e integración de IA.',
     type: 'website',
     locale: 'es_ES',
-    siteName: 'Eddy Trejo',
+    siteName: 'PathCode',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Eddy Trejo — Full Stack Developer & Automatización',
-    description: 'Full Stack Developer. Construyo plataformas web y automatizo con n8n e IA.',
+    title: 'PathCode — Ingeniería de Software & Automatización',
+    description: 'Trazamos el camino entre el código y tu negocio.',
   },
   robots: {
     index: true,

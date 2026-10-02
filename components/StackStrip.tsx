@@ -85,7 +85,7 @@ export function StackStrip() {
     <div
       className="relative py-8 overflow-hidden border-y border-white/[0.04]"
       style={{ background: 'rgba(8,12,18,0.55)' }}
-      aria-label="Stack tecnológico de Eddy Trejo"
+      aria-label="Stack tecnológico de PathCode"
     >
       {/* Subtle top glow */}
       <div

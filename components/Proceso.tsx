@@ -78,7 +78,7 @@ export function Proceso() {
           <SplitReveal id="proceso-title"
             className="font-display font-black text-glacier tracking-tight mb-4 max-w-2xl"
             style={{ fontSize: 'clamp(2.2rem, 4.5vw, 3.75rem)' }}>
-            Cómo construyo <span className="text-accent">tus resultados</span>
+            Cómo construimos <span className="text-accent">tus resultados</span>
           </SplitReveal>
           <p className="text-ink-dim text-lg max-w-xl leading-relaxed">
             Un workflow probado en cuatro fases que convierte tu visión en infraestructura digital funcional.
@@ -98,7 +98,7 @@ export function Proceso() {
                 <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
                 <div className="w-3 h-3 rounded-full bg-[#28c840]" />
               </div>
-              <span className="font-mono text-[0.58rem] text-white/20 tracking-wider">eddy-automation.json</span>
+              <span className="font-mono text-[0.58rem] text-white/20 tracking-wider">pathcode-automation.json</span>
               <div className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="font-mono text-[0.55rem] text-emerald-400/60 tracking-widest">ACTIVE</span>
@@ -107,7 +107,7 @@ export function Proceso() {
 
             {/* SVG Canvas */}
             <svg viewBox={`0 0 ${VW} ${VH}`} className="w-full h-auto" style={{ overflow: 'visible' }}
-              role="img" aria-label="Workflow de metodología de Eddy Trejo con 4 nodos conectados">
+              role="img" aria-label="Workflow de metodología de PathCode con 4 nodos conectados">
               <defs>
                 <pattern id="n8n-grid" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
                   <circle cx="0.5" cy="0.5" r="0.9" fill="rgba(160,178,188,0.06)" />

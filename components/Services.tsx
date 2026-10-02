@@ -69,7 +69,7 @@ function CodeVisual({ accent }: { accent: string }) {
       aria-hidden="true"
     >
       <div className="flex flex-col gap-[7px] p-4 font-mono text-[11px] text-left">
-        <div><span style={{ color: '#7dd3fc' }}>const</span> <span className="text-white/75">dev</span> <span className="text-white/35">=</span> <span style={{ color: '#86efac' }}>'Eddy Trejo'</span></div>
+        <div><span style={{ color: '#7dd3fc' }}>const</span> <span className="text-white/75">platform</span> <span className="text-white/35">=</span> <span style={{ color: '#86efac' }}>'PathCode'</span></div>
         <div><span style={{ color: '#7dd3fc' }}>async function</span> <span style={{ color: '#fbbf24' }}>deploy</span><span className="text-white/35">()</span> <span className="text-white/35">{'{'}</span></div>
         <div className="pl-4"><span style={{ color: '#7dd3fc' }}>await</span> <span className="text-white/55">build</span><span className="text-white/35">(config)</span></div>
         <div className="pl-4"><span style={{ color: '#7dd3fc' }}>await</span> <span className="text-white/55">push</span><span className="text-white/35">(</span><span style={{ color: '#86efac' }}>'prod'</span><span className="text-white/35">)</span></div>
@@ -257,7 +257,7 @@ export function Services() {
             className="font-display font-black text-glacier tracking-tight mb-6 max-w-3xl"
             style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
           >
-            Mis disciplinas <span className="text-accent">fundamentales</span>
+            Nuestras disciplinas <span className="text-accent">fundamentales</span>
           </SplitReveal>
           <p className="text-ink-dim text-lg max-w-2xl leading-relaxed">
             Tres pilares interconectados para construir ecosistemas digitales completos, escalables y autónomos.

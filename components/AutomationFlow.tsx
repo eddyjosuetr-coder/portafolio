@@ -57,7 +57,7 @@ function MobileFlow() {
         </div>
         <span className="font-mono text-[0.52rem] tracking-[0.18em] uppercase"
           style={{ color: 'rgba(160,178,188,0.3)' }}>
-          eddy — automation.run
+          pathcode — automation.run
         </span>
         <div className="flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
@@ -68,7 +68,7 @@ function MobileFlow() {
       {/* ── Prompt ── */}
       <div className="px-4 pt-4 pb-2">
         <p className="font-mono" style={{ fontSize: '0.6rem', color: 'rgba(160,178,188,0.35)' }}>
-          <span style={{ color: '#42C0F5' }}>eddy</span>
+          <span style={{ color: '#42C0F5' }}>pathcode</span>
           <span style={{ color: 'rgba(160,178,188,0.25)' }}>@engine:~$</span>
           <span style={{ color: 'rgba(226,229,239,0.55)' }}> run workflow --env prod</span>
         </p>
@@ -160,7 +160,7 @@ function MobileFlow() {
             ✓ &nbsp;workflow completed in 350ms &nbsp;·&nbsp; 5 nodes &nbsp;·&nbsp; 0 errors
           </p>
           <p className="font-mono mt-1" style={{ fontSize: '0.52rem', color: 'rgba(160,178,188,0.22)' }}>
-            <span style={{ color: '#42C0F5' }}>eddy</span>
+            <span style={{ color: '#42C0F5' }}>pathcode</span>
             <span style={{ color: 'rgba(160,178,188,0.2)' }}>@engine:~$</span>
             <span className="inline-block w-1.5 h-3 ml-1 align-middle animate-pulse"
               style={{ background: 'rgba(160,178,188,0.4)', borderRadius: '1px' }}

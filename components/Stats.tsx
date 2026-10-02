@@ -114,7 +114,7 @@ export function Stats() {
     <section
       className="relative py-24 overflow-hidden border-y border-white/[0.04]"
       style={{ background: 'rgba(8,12,18,0.5)' }}   /* void layer sutil */
-      aria-label="Estadísticas de Eddy Trejo"
+      aria-label="Estadísticas de PathCode"
     >
       {/* Glow ambiental de la sección */}
       <div

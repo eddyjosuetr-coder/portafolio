@@ -20,7 +20,7 @@ export function Hero() {
         height: '100svh',
         background: 'radial-gradient(120% 90% at 78% 28%, #122433 0%, #0c1825 38%, #0a121b 72%)',
       }}
-      aria-label="Eddy Trejo — Presentación"
+      aria-label="PathCode — Presentación"
     >
       {/* ── Decorative grid lines ── */}
       <div className="pc-deco pointer-events-none absolute bottom-0 top-0"
@@ -82,7 +82,7 @@ export function Hero() {
           }}>
             <span style={{ width: 36, height: 2, background: '#46cdf0', display: 'block', flexShrink: 0 }} aria-hidden="true" />
             <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: '2.5px', color: '#46cdf0' }}>
-              FULL STACK DEVELOPER &amp; AUTOMATIZACIÓN
+              INGENIERÍA DE SOFTWARE &amp; IA
             </span>
           </div>
 
@@ -94,10 +94,10 @@ export function Hero() {
             textTransform: 'uppercase',
           }}>
             <span style={{ display: 'block', color: '#fff', animation: 'pc-up .9s cubic-bezier(.2,.7,.2,1) both', animationDelay: '.12s' }}>
-              Eddy
+              Trazamos
             </span>
             <span style={{ display: 'block', color: '#46cdf0', animation: 'pc-up .9s cubic-bezier(.2,.7,.2,1) both', animationDelay: '.22s' }}>
-              Josue
+              El
             </span>
             <span style={{
               display: 'block',
@@ -106,10 +106,10 @@ export function Hero() {
               WebkitTextFillColor: 'transparent', color: 'transparent',
               animation: 'pc-up .9s cubic-bezier(.2,.7,.2,1) both', animationDelay: '.32s',
             }}>
-              Trejo
+              Futuro
             </span>
             <span style={{ display: 'block', color: '#fff', animation: 'pc-up .9s cubic-bezier(.2,.7,.2,1) both', animationDelay: '.42s' }}>
-              Rubio.
+              Digital.
             </span>
           </h1>
 
@@ -119,9 +119,9 @@ export function Hero() {
             fontSize: 16.5, lineHeight: 1.62, fontWeight: 400, color: '#9fb2bf',
             animation: 'pc-up .9s cubic-bezier(.2,.7,.2,1) both', animationDelay: '.54s',
           }}>
-            Full Stack Developer. Construyo plataformas web de alto rendimiento
-            y automatizo operaciones con n8n e IA. Del código al detalle visual —
-            llevo tu idea al siguiente nivel.
+            Construimos plataformas de clase mundial y automatizamos operaciones
+            con IA avanzada. Del código al detalle visual — elevamos cada aspecto
+            de tu negocio digital.
           </p>
 
           {/* CTAs */}
@@ -131,10 +131,8 @@ export function Hero() {
           }}>
             <MagneticButton>
               <a
-                href="https://wa.me/584243840126"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Contactar a Eddy Trejo por WhatsApp"
+                href="#contacto"
+                aria-label="Agendar una llamada con PathCode"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 10,
                   fontSize: 15, fontWeight: 700, color: '#06222e', background: '#46cdf0',
@@ -142,7 +140,7 @@ export function Hero() {
                   boxShadow: '0 8px 26px rgba(70,205,240,.28)', whiteSpace: 'nowrap',
                 }}
               >
-                Hablemos
+                Agendar descubrimiento
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <line x1="4" y1="12" x2="19" y2="12" /><polyline points="13 6 19 12 13 18" />

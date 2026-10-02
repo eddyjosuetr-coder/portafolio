@@ -14,7 +14,7 @@ export async function generateMetadata(
   const { slug } = await params
   const p = getProyecto(slug)
   if (!p) return {}
-  return { title: `${p.titulo} — Eddy Trejo`, description: p.descripcionCorta }
+  return { title: `${p.titulo} — PathCode`, description: p.descripcionCorta }
 }
 
 export default async function ProyectoPage(

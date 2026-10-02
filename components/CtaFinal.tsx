@@ -4,8 +4,6 @@ import { RevealSection }  from '@/components/ui/RevealSection'
 import { SplitReveal }    from '@/components/ui/SplitReveal'
 import { MagneticButton } from '@/components/ui/MagneticButton'
 
-const WHATSAPP_URL = 'https://wa.me/584243840126'
-
 export function CtaFinal() {
   return (
     <section
@@ -32,38 +30,31 @@ export function CtaFinal() {
                 className="font-display font-black text-white tracking-tight mb-8 leading-[1.1]"
                 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)' }}
               >
-                Tu proyecto merece un{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-glow to-silver">desarrollador de verdad.</span>
+                Tu operación merece un{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-glow to-silver">mejor ecosistema.</span>
               </SplitReveal>
 
               <p className="text-ink-dim/90 text-lg leading-relaxed mb-12 max-w-2xl mx-auto">
-                No solo escribo código; construyo plataformas que escalan y automatizo flujos que funcionan solos. Escríbeme y veamos cómo llevar tu idea a producción.
+                No construimos páginas web; diseñamos infraestructuras digitales que venden, escalan y operan por sí solas. Agenda una sesión estratégica y veamos el potencial oculto de tu negocio.
               </p>
 
               <div className="flex flex-wrap justify-center gap-4">
                 <MagneticButton>
                   <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#contacto"
                     className="btn-primary px-8 py-4 text-base hover:shadow-[0_0_40px_rgba(66,192,245,0.4)]"
-                    aria-label="Escribir por WhatsApp a Eddy Trejo"
+                    aria-label="Agendar llamada de descubrimiento"
                   >
-                    Escríbeme por WhatsApp
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                      <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
+                    Agendar sesión estratégica
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                      <path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </a>
                 </MagneticButton>
 
                 <MagneticButton>
-                  <a
-                    href="https://www.linkedin.com/in/eddy-trejo-180002315/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-ghost px-8 py-4 text-base"
-                  >
-                    Ver LinkedIn
+                  <a href="mailto:pathcode.ve@gmail.com" className="btn-ghost px-8 py-4 text-base">
+                    Escribir un mensaje
                   </a>
                 </MagneticButton>
               </div>

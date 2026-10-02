@@ -8,7 +8,7 @@ import { StackStrip }         from '@/components/StackStrip'
 import { Portfolio }          from '@/components/Portfolio'
 import { AutomationFlow }     from '@/components/AutomationFlow'
 import { Stats }              from '@/components/Stats'
-import { About }              from '@/components/About'
+import { CtaFinal }           from '@/components/CtaFinal'
 import { Services }           from '@/components/Services'
 import { Proceso }            from '@/components/Proceso'
 import { Footer }             from '@/components/Footer'
@@ -36,14 +36,14 @@ export default function Home() {
         {/* 5. Stats band */}
         <Stats />
 
-        {/* 6. Sobre mí — Bento Grid */}
-        <About />
-
         {/* 7. Servicios */}
         <Services />
 
         {/* 8. Proceso — metodología timeline */}
         <Proceso />
+
+        {/* 8. Cierre — agenda una sesión */}
+        <CtaFinal />
       </main>
 
       <Footer />
