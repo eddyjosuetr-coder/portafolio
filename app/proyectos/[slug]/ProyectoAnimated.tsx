@@ -240,16 +240,8 @@ export function ProyectoAnimated({ p }: { p: Proyecto }) {
                 <span className="font-mono text-[0.47rem] uppercase tracking-widest" style={{ color:`${accent}60` }}>Live</span>
               </div>
             </div>
-            {/* Imágenes verticales: se muestran completas y los lados se rellenan con la misma imagen desenfocada */}
-            <div className="relative overflow-hidden" style={{ background:'#0b0f15' }}>
-              <div aria-hidden="true" className="absolute inset-0"
-                style={{ backgroundImage:`url(${imagenShowcase})`, backgroundSize:'cover', backgroundPosition:'center',
-                  filter:'blur(48px) saturate(1.3)', transform:'scale(1.25)', opacity:0.75 }} />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imagenShowcase} alt={`Presentación de ${titulo}`}
-                className="relative"
-                style={{ display:'block', width:'100%', height:'auto', maxHeight:'90vh', objectFit:'contain' }} />
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={imagenShowcase} alt={`Presentación de ${titulo}`} style={{ display:'block', width:'100%', height:'auto' }} />
           </div>
         </div>
       </section>
