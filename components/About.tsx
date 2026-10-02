@@ -382,7 +382,7 @@ export function About() {
               lo llevo a <span className="underline decoration-glow/40 underline-offset-4">producción</span>.
             </h2>
             <p className="text-[0.92rem] leading-[1.75] mb-6 max-w-[500px]" style={{ color: 'rgba(150,175,195,0.75)' }}>
-              Soy Full Stack Developer de Venezuela con 8 meses de experiencia construyendo
+              Soy Full Stack Developer de Venezuela con 1 año de experiencia construyendo
               plataformas web reales — desde el diseño hasta el despliegue. Especializado en
               React, TypeScript y automatización de flujos de negocio con n8n e IA.
             </p>
@@ -396,7 +396,7 @@ export function About() {
             </div>
           </div>
 
-          {/* CARD 3: 07 meses */}
+          {/* CARD 3: 01 año */}
           <div className="md:col-span-5 rounded-3xl p-8 relative overflow-hidden group flex flex-col justify-between"
             style={{ background: 'linear-gradient(135deg, rgba(70,205,240,0.08) 0%, rgba(70,205,240,0.03) 100%)', border: '1px solid rgba(70,205,240,0.18)', minHeight: '180px' }}>
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -404,9 +404,9 @@ export function About() {
             <p className="font-mono text-[0.62rem] tracking-[0.2em] uppercase" style={{ color: 'rgba(70,205,240,0.5)' }}>Experiencia</p>
             <div className="flex items-end gap-3">
               <span className="font-display font-black leading-none"
-                style={{ fontSize: 'clamp(4rem, 8vw, 6.5rem)', color: '#46cdf0', textShadow: '0 0 40px rgba(70,205,240,0.4)' }}>08</span>
+                style={{ fontSize: 'clamp(4rem, 8vw, 6.5rem)', color: '#46cdf0', textShadow: '0 0 40px rgba(70,205,240,0.4)' }}>01</span>
               <div className="pb-3">
-                <p className="font-mono text-[0.65rem] tracking-widest uppercase leading-tight" style={{ color: 'rgba(255,255,255,0.5)' }}>meses<br />activos</p>
+                <p className="font-mono text-[0.65rem] tracking-widest uppercase leading-tight" style={{ color: 'rgba(255,255,255,0.5)' }}>año<br />activo</p>
               </div>
             </div>
             <p className="font-mono text-[0.6rem] tracking-wider" style={{ color: 'rgba(70,205,240,0.35)' }}>Proyectos reales · Clientes reales</p>
