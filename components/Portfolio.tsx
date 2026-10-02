@@ -99,8 +99,8 @@ function Panel({ project, index, isActive, onActivate, onHover, onLeave }: Panel
       data-active={isActive}
       onMouseEnter={() => onHover(index)}
       onMouseLeave={onLeave}
-      className="pf-panel group/panel relative overflow-hidden rounded-2xl lg:rounded-[1.4rem] shrink-0
-                 h-[4.5rem] data-[active=true]:h-[27rem] sm:data-[active=true]:h-[30rem]
+      className="pf-panel group/panel relative overflow-hidden rounded-2xl lg:rounded-[1.4rem] shrink-0 bg-void
+                 h-[4.5rem] data-[active=true]:h-auto
                  lg:h-auto lg:data-[active=true]:h-auto lg:basis-0 lg:grow lg:data-[active=true]:grow-[11]
                  motion-reduce:!transition-none"
       style={{
@@ -109,7 +109,8 @@ function Panel({ project, index, isActive, onActivate, onHover, onLeave }: Panel
         boxShadow: isActive ? `0 30px 80px rgba(0,0,0,0.55), 0 0 60px ${project.accentGlow}` : 'none',
       }}
     >
-      {/* Captura */}
+      {/* Fondo del panel: franja cerrada (móvil y escritorio) o panel abierto (escritorio) */}
+      <div className={`absolute inset-0 ${isActive ? 'hidden lg:block' : ''}`}>
       <Image src={project.imagen} alt={isActive ? `Captura de ${project.titulo}` : ''} fill unoptimized
         sizes="(max-width: 1024px) 100vw, 70vw"
         className="object-cover transition-[transform,filter] duration-700 group-hover/panel:scale-[1.03]"
@@ -140,6 +141,18 @@ function Panel({ project, index, isActive, onActivate, onHover, onLeave }: Panel
         }}>
         {pad(index)}
       </span>
+      </div>
+
+      {/* Móvil abierto: la captura completa en su proporción y la ficha debajo */}
+      {isActive && (
+        <div className="lg:hidden">
+          <div className="relative aspect-[2/1]">
+            <Image src={project.imagen} alt={`Captura de ${project.titulo}`} fill unoptimized sizes="100vw"
+              className="object-cover object-top" />
+          </div>
+          <PanelDetails project={project} index={index} />
+        </div>
+      )}
 
       {/* Rótulo del panel cerrado — vertical en escritorio, horizontal en móvil */}
       <div aria-hidden="true"
@@ -156,7 +169,7 @@ function Panel({ project, index, isActive, onActivate, onHover, onLeave }: Panel
 
       {/* Ficha */}
       {isActive && (
-        <div className="absolute inset-0 z-20 flex items-end pointer-events-none">
+        <div className="hidden lg:flex absolute inset-0 z-20 items-end pointer-events-none">
           <PanelDetails project={project} index={index} />
         </div>
       )}
