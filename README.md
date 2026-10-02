@@ -30,7 +30,7 @@ Portafolio one-page con scroll horizontal animado para los proyectos, sección d
 | Proyecto | Categoría |
 |---|---|
 | Lunamare | Fullstack Web App |
-| Distribuidora Marimar | E-commerce en producción |
+| Distribuidora Marimar | E-commerce · En línea |
 | Velluto Ristorante | Web App + Automatización |
 | DevConnect | Red Social Fullstack |
 | Velluto – Reservas en Tiempo Real | Automatización n8n |

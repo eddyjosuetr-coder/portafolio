@@ -1,198 +1,203 @@
 'use client'
 
-import Image                    from 'next/image'
-import Link                     from 'next/link'
+import Image                       from 'next/image'
+import Link                        from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { gsap }                 from '@/lib/gsap'
-import { SplitReveal }          from '@/components/ui/SplitReveal'
+import { SplitReveal }             from '@/components/ui/SplitReveal'
 import { PROYECTOS, type Proyecto } from '@/lib/proyectos'
 
 /* ----------------------------------------------------------
-   Portafolio — índice editorial
-   Escritorio: lista tipográfica + pantalla de proyección que
-   cambia al pasar el cursor. Todo cabe en una sola pantalla.
-   Móvil: lista compacta con miniatura.
+   Portafolio — acordeón de paneles
+   Los 7 proyectos conviven en una sola pantalla: el activo se
+   abre a todo color con su ficha, el resto queda como franja
+   teñida de su color. Escritorio: en fila, se abre al pasar el
+   cursor. Móvil: en columna, se abre al tocar.
 ---------------------------------------------------------- */
-const TOTAL       = String(PROYECTOS.length).padStart(2, '0')
-const MAX_CHIPS   = 4
-const WIPE_SECS   = 0.75
-const ZOOM_SECS   = 1.2
+const TOTAL        = String(PROYECTOS.length).padStart(2, '0')
+const MAX_CHIPS    = 4
+const HOVER_DELAY  = 110   // ms — evita abrir cada panel que el cursor cruza de camino
+const EASE         = 'cubic-bezier(0.16,1,0.3,1)'
 
 const pad = (n: number): string => String(n + 1).padStart(2, '0')
 
-function ArrowIcon({ size = 16 }: { size?: number }) {
+function ArrowIcon({ size = 14 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path d="M3 13L13 3M13 3H5.5M13 3V10.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M3 13L13 3M13 3H5.5M13 3V10.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
 }
 
-/* ── Fila del índice ─────────────────────────────────────── */
-interface RowProps {
-  project:  Proyecto
-  index:    number
-  isActive: boolean
-  onActivate: (i: number) => void
+/* ── Ficha del panel abierto ─────────────────────────────── */
+function PanelDetails({ project, index }: { project: Proyecto; index: number }) {
+  return (
+    <div className="animate-flow-in relative z-20 m-3 sm:m-5 lg:m-7 w-[calc(100%-1.5rem)] max-w-[560px] p-5 sm:p-6 rounded-2xl backdrop-blur-xl pointer-events-none"
+      style={{ animationDelay: '180ms', opacity: 0, background: 'rgba(6,10,18,0.74)', border: `1px solid ${project.accent}30`, boxShadow: '0 20px 50px rgba(0,0,0,0.45)' }}>
+      <div className="flex flex-wrap items-center gap-2 mb-3">
+        <span className="px-2.5 py-1 rounded-full font-mono text-[0.56rem] font-bold uppercase tracking-[0.18em]"
+          style={{ background: `${project.accent}22`, border: `1px solid ${project.accent}55`, color: project.accent }}>
+          {project.categoria}
+        </span>
+        {project.liveUrl && !project.categoria.includes('En línea') && (
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-mono text-[0.56rem] font-bold uppercase tracking-[0.18em] text-emerald-300"
+            style={{ background: 'rgba(16,185,129,0.14)', border: '1px solid rgba(52,211,153,0.35)' }}>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> En línea
+          </span>
+        )}
+      </div>
+
+      <h3 className="font-display font-black text-white tracking-tight leading-[1.02]"
+        style={{ fontSize: 'clamp(1.6rem, 2.8vw, 2.8rem)' }}>
+        {project.titulo}
+      </h3>
+
+      <p className="mt-3 text-[0.86rem] leading-relaxed line-clamp-2 max-w-[480px]" style={{ color: 'rgba(214,224,232,0.82)' }}>
+        {project.descripcionCorta}
+      </p>
+
+      <ul className="hidden sm:flex flex-wrap gap-1.5 mt-4" aria-label="Tecnologías principales">
+        {project.tecnologias.slice(0, MAX_CHIPS).map((t) => (
+          <li key={t} className="px-2.5 py-1 rounded-md font-mono text-[0.6rem] tracking-wide backdrop-blur-md"
+            style={{ background: 'rgba(4,8,16,0.55)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(226,229,239,0.85)' }}>
+            {t}
+          </li>
+        ))}
+      </ul>
+
+      <div className="flex items-center gap-5 mt-5 pointer-events-auto">
+        <Link href={`/proyectos/${project.slug}`}
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-mono font-bold text-[0.66rem] tracking-widest uppercase transition-transform duration-200 hover:-translate-y-0.5"
+          style={{ background: project.accent, color: '#030810', boxShadow: `0 12px 30px ${project.accentGlow}` }}>
+          Ver caso <ArrowIcon size={12} />
+        </Link>
+        {project.liveUrl && (
+          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-mono text-[0.66rem] font-bold tracking-widest uppercase text-white/85 underline-offset-4 hover:underline">
+            Abrir sitio <ArrowIcon size={11} />
+          </a>
+        )}
+      </div>
+
+      <span className="sr-only">Proyecto {pad(index)} de {TOTAL}</span>
+    </div>
+  )
 }
 
-function IndexRow({ project, index, isActive, onActivate }: RowProps) {
-  return (
-    <li className="border-t border-white/[0.07] last:border-b">
-      <Link
-        href={`/proyectos/${project.slug}`}
-        onMouseEnter={() => onActivate(index)}
-        onFocus={() => onActivate(index)}
-        aria-label={`Ver proyecto: ${project.titulo}`}
-        className="pf-row group/row relative flex items-center gap-4 lg:gap-6 py-4 lg:py-[clamp(0.8rem,1.6svh,1.25rem)] pr-2 outline-none transition-opacity duration-300 lg:group-hover/list:opacity-35 lg:hover:!opacity-100 focus-visible:!opacity-100"
-      >
-        {/* Barra de acento — crece desde la izquierda en la fila activa */}
-        <span aria-hidden="true"
-          className="hidden lg:block absolute left-0 top-0 h-[2px] w-full origin-left transition-transform duration-500"
-          style={{ background: project.accent, transform: `scaleX(${isActive ? 1 : 0})`, transitionTimingFunction: 'cubic-bezier(0.16,1,0.3,1)' }} />
+/* ── Panel ───────────────────────────────────────────────── */
+interface PanelProps {
+  project:    Proyecto
+  index:      number
+  isActive:   boolean
+  onActivate: (i: number) => void
+  onHover:    (i: number) => void
+  onLeave:    () => void
+}
 
-        <span className="font-mono tabular-nums text-[0.68rem] tracking-[0.14em] w-6 shrink-0 transition-colors duration-300"
-          style={{ color: isActive ? project.accent : 'rgba(160,178,188,0.4)' }}>
+function Panel({ project, index, isActive, onActivate, onHover, onLeave }: PanelProps) {
+  return (
+    <article
+      data-active={isActive}
+      onMouseEnter={() => onHover(index)}
+      onMouseLeave={onLeave}
+      className="pf-panel group/panel relative overflow-hidden rounded-2xl lg:rounded-[1.4rem] shrink-0
+                 h-[4.5rem] data-[active=true]:h-[27rem] sm:data-[active=true]:h-[30rem]
+                 lg:h-auto lg:data-[active=true]:h-auto lg:basis-0 lg:grow lg:data-[active=true]:grow-[11]
+                 motion-reduce:!transition-none"
+      style={{
+        transition: `flex-grow 700ms ${EASE}, height 600ms ${EASE}, box-shadow 500ms ease`,
+        border: `1px solid ${isActive ? `${project.accent}66` : 'rgba(255,255,255,0.07)'}`,
+        boxShadow: isActive ? `0 30px 80px rgba(0,0,0,0.55), 0 0 60px ${project.accentGlow}` : 'none',
+      }}
+    >
+      {/* Captura */}
+      <Image src={project.imagen} alt={isActive ? `Captura de ${project.titulo}` : ''} fill unoptimized
+        sizes="(max-width: 1024px) 100vw, 70vw"
+        className="object-cover transition-[transform,filter] duration-700 group-hover/panel:scale-[1.03]"
+        style={{
+          objectPosition: 'center top',
+          filter: isActive ? 'none' : 'grayscale(0.55) brightness(0.5)',
+        }} />
+
+      {/* Tinte del color del proyecto — solo cerrado */}
+      <div aria-hidden="true" className="absolute inset-0 transition-opacity duration-500 mix-blend-color"
+        style={{ background: project.accent, opacity: isActive ? 0 : 0.35 }} />
+
+      {/* Velos para leer: inferior al abrir, general cerrado */}
+      <div aria-hidden="true" className="absolute inset-0 transition-opacity duration-500"
+        style={{ background: 'linear-gradient(to top, rgba(4,8,16,0.96) 0%, rgba(4,8,16,0.55) 42%, rgba(4,8,16,0) 72%)', opacity: isActive ? 1 : 0 }} />
+      <div aria-hidden="true" className="absolute inset-0 transition-opacity duration-500"
+        style={{ background: 'linear-gradient(to bottom, rgba(4,8,16,0.2), rgba(4,8,16,0.75))', opacity: isActive ? 0 : 1 }} />
+
+      {/* Número gigante en contorno — firma editorial del panel abierto */}
+      <span aria-hidden="true"
+        className="absolute -top-3 right-4 lg:right-7 font-display font-black leading-none select-none transition-all duration-700 pointer-events-none"
+        style={{
+          fontSize: 'clamp(5rem, 11vw, 10rem)',
+          color: 'transparent',
+          WebkitTextStroke: `1.5px ${project.accent}`,
+          opacity: isActive ? 0.4 : 0,
+          transform: `translateY(${isActive ? 0 : -24}px)`,
+        }}>
+        {pad(index)}
+      </span>
+
+      {/* Rótulo del panel cerrado — vertical en escritorio, horizontal en móvil */}
+      <div aria-hidden="true"
+        className="absolute inset-0 z-10 flex items-center lg:flex-col lg:items-center lg:justify-between px-5 lg:px-0 lg:py-6 gap-4 transition-opacity duration-300 pointer-events-none"
+        style={{ opacity: isActive ? 0 : 1 }}>
+        <span className="font-mono text-[0.62rem] font-bold tabular-nums tracking-[0.14em]" style={{ color: project.accent }}>
           {pad(index)}
         </span>
-
-        <span className="flex-1 min-w-0">
-          <span className={`block font-display font-black tracking-tight leading-[1.05] text-glacier transition-transform duration-500 lg:group-hover/row:translate-x-2 ${isActive ? 'lg:text-white' : 'lg:text-glacier/75'}`}
-            style={{ fontSize: 'clamp(1.15rem, 2vw, 2.1rem)', transitionTimingFunction: 'cubic-bezier(0.16,1,0.3,1)' }}>
-            {project.titulo}
-          </span>
-          <span className="mt-1 block font-mono uppercase tracking-[0.16em] text-[0.56rem] lg:text-[0.58rem]"
-            style={{ color: `${project.accent}b3` }}>
-            {project.categoria}
-          </span>
+        <span className="font-display font-black text-white/90 tracking-tight whitespace-nowrap text-[1.05rem] lg:text-[1.15rem] lg:[writing-mode:vertical-rl] lg:rotate-180 truncate">
+          {project.titulo}
         </span>
-
-        {/* Miniatura — solo móvil */}
-        <span className="lg:hidden relative shrink-0 w-[5.5rem] aspect-[4/3] rounded-lg overflow-hidden border border-white/10">
-          <Image src={project.imagen} alt="" fill unoptimized sizes="88px"
-            className="object-cover" style={{ objectPosition: project.mobilePos ?? 'center' }} />
-        </span>
-
-        <span className="hidden lg:block shrink-0 transition-all duration-300"
-          style={{ color: project.accent, opacity: isActive ? 1 : 0, transform: `translateX(${isActive ? 0 : -8}px)` }}>
-          <ArrowIcon />
-        </span>
-      </Link>
-    </li>
-  )
-}
-
-/* ── Pantalla de proyección (escritorio) ─────────────────── */
-function CropMarks({ color }: { color: string }) {
-  const base = 'absolute w-4 h-4 pointer-events-none transition-colors duration-500'
-  const style = { borderColor: color }
-  return (
-    <>
-      <span aria-hidden="true" className={`${base} -top-2 -left-2 border-t border-l`} style={style} />
-      <span aria-hidden="true" className={`${base} -top-2 -right-2 border-t border-r`} style={style} />
-      <span aria-hidden="true" className={`${base} -bottom-2 -left-2 border-b border-l`} style={style} />
-      <span aria-hidden="true" className={`${base} -bottom-2 -right-2 border-b border-r`} style={style} />
-    </>
-  )
-}
-
-function Projector({ active }: { active: number }) {
-  const layersRef = useRef<(HTMLDivElement | null)[]>([])
-  const zRef      = useRef(1)
-  const project   = PROYECTOS[active]
-
-  /* Cada cambio: la nueva captura sube como una cortina sobre la anterior */
-  useEffect(() => {
-    const layer = layersRef.current[active]
-    if (!layer) return
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    zRef.current += 1
-    layer.style.zIndex = String(zRef.current)
-    gsap.fromTo(layer,
-      { clipPath: 'inset(100% 0% 0% 0%)' },
-      { clipPath: 'inset(0% 0% 0% 0%)', duration: reduced ? 0 : WIPE_SECS, ease: 'expo.out', overwrite: true })
-    const img = layer.querySelector('img')
-    if (img && !reduced)
-      gsap.fromTo(img, { scale: 1.08 }, { scale: 1, duration: ZOOM_SECS, ease: 'expo.out', overwrite: true })
-  }, [active])
-
-  return (
-    <div className="lg:sticky lg:top-28">
-      {/* Lectura superior */}
-      <div className="flex items-center justify-between mb-4 font-mono text-[0.6rem] uppercase tracking-[0.2em]">
-        <span style={{ color: 'rgba(160,178,188,0.5)' }}>
-          <span className="text-white tabular-nums">{pad(active)}</span> / {TOTAL}
-        </span>
-        <span className="flex items-center gap-2" style={{ color: project.liveUrl ? '#34d399' : 'rgba(160,178,188,0.5)' }}>
-          <span className={`w-1.5 h-1.5 rounded-full ${project.liveUrl ? 'bg-emerald-400 animate-pulse' : 'bg-silver/40'}`} />
-          {project.liveUrl ? 'En vivo' : 'Caso de estudio'}
-        </span>
+        <span className="hidden lg:block w-1.5 h-1.5 rounded-full" style={{ background: project.accent }} />
       </div>
 
-      {/* Pantalla */}
-      <div className="relative">
-        <CropMarks color={project.accent} />
-        <div className="relative aspect-[16/10] rounded-xl overflow-hidden bg-void"
-          style={{ boxShadow: `0 40px 90px rgba(0,0,0,0.6), 0 0 70px ${project.accentGlow}`, transition: 'box-shadow 600ms ease' }}>
-          {PROYECTOS.map((p, i) => (
-            <div key={p.slug}
-              ref={(el) => { layersRef.current[i] = el }}
-              className="absolute inset-0"
-              style={{ clipPath: i === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(100% 0% 0% 0%)', zIndex: i === 0 ? 1 : 0 }}
-              aria-hidden={i !== active}>
-              <Image src={p.imagen} alt={`Captura de ${p.titulo}`} fill unoptimized
-                sizes="(max-width: 1440px) 45vw, 620px"
-                className="object-cover object-top" />
-            </div>
-          ))}
+      {/* Ficha */}
+      {isActive && (
+        <div className="absolute inset-0 z-20 flex items-end pointer-events-none">
+          <PanelDetails project={project} index={index} />
         </div>
-      </div>
+      )}
 
-      {/* Ficha del proyecto — se reanima en cada cambio */}
-      <div key={project.slug} className="animate-flow-in mt-6">
-        <p className="text-[0.88rem] leading-relaxed line-clamp-3" style={{ color: 'rgba(160,178,195,0.8)' }}>
-          {project.descripcionCorta}
-        </p>
-        <ul className="flex flex-wrap gap-1.5 mt-4" aria-label="Tecnologías principales">
-          {project.tecnologias.slice(0, MAX_CHIPS).map((t) => (
-            <li key={t} className="px-2.5 py-1 rounded-md font-mono text-[0.6rem] tracking-wide"
-              style={{ background: 'rgba(255,255,255,0.04)', border: `1px solid ${project.accent}26`, color: 'rgba(215,225,232,0.75)' }}>
-              {t}
-            </li>
-          ))}
-          {project.tecnologias.length > MAX_CHIPS && (
-            <li className="px-2 py-1 font-mono text-[0.6rem]" style={{ color: 'rgba(160,178,188,0.45)' }}>
-              +{project.tecnologias.length - MAX_CHIPS}
-            </li>
-          )}
-        </ul>
-        <div className="flex items-center gap-5 mt-5">
-          <Link href={`/proyectos/${project.slug}`}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full font-mono font-bold text-[0.65rem] tracking-widest uppercase transition-transform duration-200 hover:-translate-y-0.5"
-            style={{ background: project.accent, color: '#030810' }}>
-            Ver caso <ArrowIcon size={12} />
-          </Link>
-          {project.liveUrl && (
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-[0.65rem] tracking-widest uppercase underline-offset-4 hover:underline"
-              style={{ color: project.accent }}>
-              Abrir sitio <ArrowIcon size={11} />
-            </a>
-          )}
-        </div>
-      </div>
-    </div>
+      {/* Capa de acción: abre el panel cerrado, o lleva al caso si ya está abierto */}
+      {isActive ? (
+        <Link href={`/proyectos/${project.slug}`} aria-label={`Ver proyecto: ${project.titulo}`}
+          className="absolute inset-0 z-10 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-4"
+          style={{ outlineColor: project.accent }} />
+      ) : (
+        <button type="button" onClick={() => onActivate(index)} onFocus={() => onActivate(index)}
+          aria-label={`Mostrar proyecto: ${project.titulo}`}
+          className="absolute inset-0 z-30 cursor-pointer" />
+      )}
+    </article>
   )
 }
 
 /* ── Sección ─────────────────────────────────────────────── */
 export function Portfolio() {
   const [active, setActive] = useState(0)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const clearTimer = () => { if (timerRef.current) clearTimeout(timerRef.current) }
+  const hoverTo = (i: number) => {
+    if (!window.matchMedia('(hover: hover)').matches) return
+    clearTimer()
+    timerRef.current = setTimeout(() => setActive(i), HOVER_DELAY)
+  }
+  useEffect(() => clearTimer, [])
+
+  const project = PROYECTOS[active]
 
   return (
-    <section id="portafolio" className="relative section-pad" aria-labelledby="portafolio-title">
-      <div className="site-container">
-        <header className="flex flex-wrap items-end justify-between gap-4 mb-8 lg:mb-12">
+    <section id="portafolio" className="relative section-pad overflow-hidden" aria-labelledby="portafolio-title">
+      {/* Resplandor ambiental que toma el color del proyecto abierto */}
+      <div aria-hidden="true" className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[60%] rounded-full blur-[140px] pointer-events-none opacity-60 transition-colors duration-700"
+        style={{ background: project.accentGlow }} />
+
+      <div className="relative w-full max-w-[min(1440px,96vw)] mx-auto px-4 sm:px-6 lg:px-10">
+        <header className="flex flex-wrap items-end justify-between gap-4 mb-7 lg:mb-10">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-glass bg-void/60 backdrop-blur-md mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-glow animate-pulse" />
@@ -204,21 +209,28 @@ export function Portfolio() {
               Plataformas de<span className="text-accent"> clase mundial</span>
             </SplitReveal>
           </div>
-          <p className="hidden lg:block font-mono text-[0.62rem] uppercase tracking-[0.2em] text-silver/40 pb-2">
-            {TOTAL} proyectos · pasa el cursor para ver cada uno
-          </p>
+
+          {/* Contador + pestañas */}
+          <div className="hidden lg:flex items-center gap-5 pb-2">
+            <span className="font-mono text-[0.7rem] tracking-[0.2em] text-silver/50 tabular-nums">
+              <span className="text-white font-bold">{pad(active)}</span> / {TOTAL}
+            </span>
+            <div className="flex gap-1.5" role="group" aria-label="Elegir proyecto">
+              {PROYECTOS.map((p, i) => (
+                <button key={p.slug} type="button" onClick={() => setActive(i)}
+                  aria-label={`Mostrar ${p.titulo}`} aria-pressed={i === active}
+                  className="h-1.5 rounded-full transition-all duration-500"
+                  style={{ width: i === active ? 28 : 10, background: i === active ? p.accent : 'rgba(160,178,188,0.25)' }} />
+              ))}
+            </div>
+          </div>
         </header>
 
-        <div className="grid lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-10 xl:gap-16 items-start">
-          <ol className="group/list">
-            {PROYECTOS.map((p, i) => (
-              <IndexRow key={p.slug} project={p} index={i} isActive={i === active} onActivate={setActive} />
-            ))}
-          </ol>
-
-          <div className="hidden lg:block">
-            <Projector active={active} />
-          </div>
+        <div className="flex flex-col lg:flex-row gap-2.5 lg:gap-3 lg:h-[clamp(470px,66svh,700px)]">
+          {PROYECTOS.map((p, i) => (
+            <Panel key={p.slug} project={p} index={i} isActive={i === active}
+              onActivate={setActive} onHover={hoverTo} onLeave={clearTimer} />
+          ))}
         </div>
       </div>
     </section>

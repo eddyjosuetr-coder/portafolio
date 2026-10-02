@@ -50,10 +50,10 @@ export const PROYECTOS: Proyecto[] = [
   {
     slug:             'distribuidora-marimar',
     titulo:           'Distribuidora Marimar',
-    categoria:        'E-commerce en producción',
+    categoria:        'E-commerce · En línea',
     descripcionCorta: 'Tienda en línea de un distribuidor de víveres y charcutería de Maracay: 341 productos, precios en bolívares con la tasa BCV del día y pedidos directos por WhatsApp.',
     descripcionLarga:
-      'Tienda en línea de Distribuidora Marimar C.A., con 36 años surtiendo a Maracay. Está en producción y el dueño la usa a diario: 341 productos de 129 marcas en 26 categorías. El catálogo está en dólares y la tienda muestra el bolívar como precio principal, con una tasa que se resuelve sola (la que publica el dueño, la oficial del BCV o la última conocida) para no quedarse nunca sin precios. No hay pasarela de pago: el cliente arma su carrito y la tienda le abre WhatsApp con el pedido escrito y un enlace que muestra cada producto con su foto, sin servidor de pedidos. El dueño administra ofertas, precios, productos ocultos y la tasa del día desde un panel propio protegido con Supabase Auth.',
+      'Tienda en línea de Distribuidora Marimar C.A., con 36 años surtiendo a Maracay. Está en línea con dominio y hosting propios, y el dueño la usa a diario: 341 productos de 129 marcas en 26 categorías. El catálogo está en dólares y la tienda muestra el bolívar como precio principal, con una tasa que se resuelve sola (la que publica el dueño, la oficial del BCV o la última conocida) para no quedarse nunca sin precios. No hay pasarela de pago: el cliente arma su carrito y la tienda le abre WhatsApp con el pedido escrito y un enlace que muestra cada producto con su foto, sin servidor de pedidos. El dueño administra ofertas, precios, productos ocultos y la tasa del día desde un panel propio protegido con Supabase Auth.',
     features: [
       'Catálogo de 341 productos generado desde una tabla en Python, con fotos optimizadas por Pillow (946 MB → 19 MB en WebP)',
       'Precios en bolívares con tasa BCV automática, tasa manual del dueño con vencimiento y respaldo sin conexión',
@@ -63,7 +63,7 @@ export const PROYECTOS: Proyecto[] = [
       'Panel del dueño con Supabase Auth y Row Level Security: ofertas, precios, ocultar productos y tasa del día',
       'Desplegado en Cloudflare Pages con CSP por huellas SHA-256, HSTS y caché por tipo de archivo',
     ],
-    destacado:        'Tienda real en producción: el dueño la administra a diario y sus clientes compran desde el teléfono.',
+    destacado:        'Tienda real en línea: el dueño la administra a diario y sus clientes compran desde el teléfono.',
     repoUrl:          'https://github.com/eddyjosuetr-coder/marimar',
     liveUrl:          'https://distribuidoramarimar.com',
     status:           'live',
